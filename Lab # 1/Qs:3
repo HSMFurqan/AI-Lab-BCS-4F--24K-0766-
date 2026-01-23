@@ -1,1 +1,11 @@
-
+dict = {}
+dict['name1'] =input("Enter student name : ")
+dict['marks1']=input("Enter Marks : ")
+dict['name2'] =input("Enter student name : ")
+dict['marks2']=input("Enter Marks : ")
+dict['name3'] =input("Enter student name : ")
+dict['marks3']=input("Enter Marks : ") 
+print("Student Records : ")
+print(dict["name1"],":",dict["marks1"])
+print(dict["name2"],":",dict["marks2"])
+print(dict["name3"],":",dict["marks3"])
