@@ -1,1 +1,11 @@
-
+def calculate_average(marks):
+    total = 0
+    count = 0
+    for marks in marks:
+        total += marks
+        count += 1
+    return total / count
+marks = [70,80,90]
+average = calculate_average(marks)
+print("Marks : ",marks)
+print("Average : ",average)    
