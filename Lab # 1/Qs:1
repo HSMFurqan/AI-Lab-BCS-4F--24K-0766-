@@ -1,1 +1,12 @@
-
+n = input("Enter student name : ")
+m = int(input("Enter marks : "))
+print("Student Name : ",n)
+print("Marks : ",m)
+if m>=85:
+  print("Grade : A")
+elif m>=70:
+  print("Grade : B")
+elif m>=50:
+  print("Grade : C")
+elif m<50:
+  print("Grade : F")      
