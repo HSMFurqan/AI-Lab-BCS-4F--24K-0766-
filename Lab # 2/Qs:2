@@ -1,0 +1,34 @@
+class Employee:
+    def __init__(self, name, emp_id):
+        self.name = name
+        self.emp_id = emp_id
+
+    def calculate_salary(self):
+        pass
+
+class FullTimeEmployee(Employee):
+    def __init__(self, name, emp_id, monthly_salary):
+        super().__init__(name, emp_id)
+        self.monthly_salary = monthly_salary
+
+    def calculate_salary(self):
+        return self.monthly_salary
+
+class PartTimeEmployee(Employee):
+    def __init__(self, name, emp_id, hours_worked, hourly_rate):
+        super().__init__(name, emp_id)
+        self.hours_worked = hours_worked
+        self.hourly_rate = hourly_rate
+
+    def calculate_salary(self):
+        return self.hours_worked * self.hourly_rate
+
+emp1 = FullTimeEmployee("Ali", 201, 60000)
+emp2 = FullTimeEmployee("Ahmed", 202, 80000)
+emp3 = PartTimeEmployee("Furqan", 203, 320, 500)
+emp4 = PartTimeEmployee("Hassan", 204, 250, 400)
+
+print("Full Time Employee Salary:", emp1.calculate_salary())
+print("Full Time Employee Salary:", emp2.calculate_salary())
+print("Part Time Employee Salary:", emp3.calculate_salary())
+print("Part Time Employee Salary:", emp4.calculate_salary())
