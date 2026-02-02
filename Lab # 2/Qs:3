@@ -1,0 +1,29 @@
+class Student:
+    def __init__(self, name):
+        self.name = name
+        self.__marks = 0  
+
+    def set_marks(self, marks):
+        self.__marks = marks
+
+    def get_marks(self):
+        return self.__marks
+
+    def calculate_grade(self):
+        if self.__marks >= 80:
+            return "A"
+        elif self.__marks >= 60:
+            return "B"
+        elif self.__marks >= 40:
+            return "C"
+        else:
+            return "Fail"
+
+student1 = Student("Furqan")
+student2 = Student("Ayesha")
+
+student1.set_marks(85)
+student2.set_marks(55)
+
+print(student1.name, "- Marks:", student1.get_marks(), "- Grade:", student1.calculate_grade())
+print(student2.name, "- Marks:", student2.get_marks(), "- Grade:", student2.calculate_grade())
