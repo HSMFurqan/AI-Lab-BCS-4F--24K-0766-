@@ -1,0 +1,12 @@
+import random
+
+Q = {"Play": 0, "Rest": 0}
+
+for step in range(1, 11):
+    action = random.choice(["Play", "Rest"])
+    reward = 5 if action == "Play" else 1
+    Q[action] += reward
+
+    print(f"Step {step}: Action {action} Reward {reward}")
+
+print("Q-table Updated:", Q)
