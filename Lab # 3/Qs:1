@@ -1,1 +1,9 @@
+def traffic_light_agent(percept):
+    if percept == "Heavy Traffic":
+        action = "Extend Green Time"
+    else:
+        action = "Normal Green"
+    print(f"Percept: {percept} → Action: {action}")
 
+traffic_light_agent("Heavy Traffic")
+traffic_light_agent("Light Traffic")
