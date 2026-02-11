@@ -1,0 +1,29 @@
+grid = {
+    'a': 'safe', 'b': 'safe', 'c': 'fire',
+    'd': 'safe', 'e': 'fire', 'f': 'safe',
+    'g': 'safe', 'h': 'safe', 'j': 'fire'
+}
+
+path = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j']
+
+def display_environment():
+    for room in ['a','b','c','d','e','f','g','h','j']:
+        symbol = '🔥' if grid[room] == 'fire' else ' '
+        print(f"{room}:{symbol}", end="  ")
+        if room in ['c', 'f']:
+            print()
+    print("\n")
+
+for room in path:
+    print(f"Robot moved to room {room}")
+
+    if grid[room] == 'fire':
+        print("Fire detected! Extinguishing...")
+        grid[room] = 'safe'
+    else:
+        print("No fire detected.")
+
+    display_environment()
+
+print("Final Status: All fires extinguished")
+display_environment()
