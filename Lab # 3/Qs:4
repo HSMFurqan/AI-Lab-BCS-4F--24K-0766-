@@ -1,0 +1,14 @@
+restaurants = {
+    "A": {"distance": 3, "rating": 7},
+    "B": {"distance": 5, "rating": 9}
+}
+
+utilities = {}
+
+for r in restaurants:
+    utility = restaurants[r]["rating"] - restaurants[r]["distance"]
+    utilities[r] = utility
+    print(f"Restaurant {r} Utility = {utility}")
+
+selected = max(utilities, key=utilities.get)
+print("\nSelected Restaurant:", selected)
