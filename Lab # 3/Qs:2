@@ -1,0 +1,20 @@
+import random
+previous_students = None
+previous_light = "OFF"
+for step in range(1, 9):
+    students_present = random.choice(["Yes", "No"])
+    action = "No Action"
+    if students_present == "Yes" and previous_light == "OFF":
+        previous_light = "ON"
+        action = "Turn Lights ON"
+    elif students_present == "No" and previous_light == "ON":
+        previous_light = "OFF"
+        action = "Turn Lights OFF"
+
+    print(f"Step {step}")
+    print("Students Present:", students_present)
+    print("Action:", action)
+    print("Agent Memory → Previous Students:", previous_students,
+          "| Light Status:", previous_light)
+    print("-" * 30)
+    previous_students = students_present
