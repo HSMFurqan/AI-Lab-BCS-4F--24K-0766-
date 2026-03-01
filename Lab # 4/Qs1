@@ -1,0 +1,31 @@
+building = [
+    [1,1,0,1],
+    [0,1,1,1],
+    [1,1,0,1],
+    [1,0,1,1]
+]
+
+rows, cols = 4, 4
+directions = [(-1,0),(1,0),(0,-1),(0,1)]
+
+def bfs(start, goal):
+    queue = [(start, [start])]
+    visited = []
+
+    while queue:
+        (r,c), path = queue.pop(0)
+
+        if (r,c) == goal:
+            return path
+
+        if (r,c) not in visited:
+            visited.append((r,c))
+
+            for dr,dc in directions:
+                nr, nc = r+dr, c+dc
+                if 0<=nr<rows and 0<=nc<cols:
+                    if building[nr][nc] == 1:
+                        queue.append(((nr,nc), path+[(nr,nc)]))
+    return None
+
+print("BFS Path:", bfs((0,0),(3,3)))
