@@ -1,0 +1,32 @@
+import heapq
+
+# delivery point: (distance, deadline)
+deliveries = {
+    'A': (5, 10),
+    'B': (3, 5),
+    'C': (8, 20),
+    'D': (2, 3)
+}
+
+def greedy_delivery(start_time):
+    pq = []
+    current_time = start_time
+    total_distance = 0
+    route = []
+
+    for point in deliveries:
+        distance, deadline = deliveries[point]
+        # priority = deadline first
+        heapq.heappush(pq, (deadline, distance, point))
+
+    while pq:
+        deadline, distance, point = heapq.heappop(pq)
+
+        current_time += distance
+        total_distance += distance
+        route.append(point)
+
+    return route, total_distance
+
+
+print("Delivery Route:", greedy_delivery(0))
