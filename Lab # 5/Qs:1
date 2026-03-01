@@ -1,0 +1,65 @@
+import heapq
+
+# Example Maze Graph
+graph = {
+    'S':[('A',2),('B',4)],
+    'A':[('C',3),('D',5)],
+    'B':[('E',6)],
+    'C':[],
+    'D':[('F',4)],
+    'E':[],
+    'F':[]
+}
+
+# Heuristic values (distance estimate to nearest goal)
+heuristic = {
+    'S':7,'A':6,'B':5,
+    'C':2,'D':3,'E':1,'F':0
+}
+
+def best_first(start, goal):
+    pq = [(heuristic[start], start, [start])]
+    visited = []
+
+    while pq:
+        h, node, path = heapq.heappop(pq)
+
+        if node == goal:
+            return path
+
+        if node not in visited:
+            visited.append(node)
+
+            for neighbor, cost in graph[node]:
+                heapq.heappush(pq,
+                    (heuristic[neighbor], neighbor, path+[neighbor]))
+    return None
+
+
+def multi_goal_search(start, goals):
+    current = start
+    final_path = [start]
+
+    while goals:
+        shortest = None
+        best_goal = None
+
+        for g in goals:
+            path = best_first(current, g)
+            if path:
+                if not shortest or len(path) < len(shortest):
+                    shortest = path
+                    best_goal = g
+
+        if not shortest:
+            break
+
+        final_path += shortest[1:]
+        current = best_goal
+        goals.remove(best_goal)
+
+    return final_path
+
+
+goals = ['C','F']
+print("Final Path:", multi_goal_search('S', goals))
