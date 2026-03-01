@@ -1,0 +1,33 @@
+graph = {
+    'A':['B','C'],
+    'B':['D','E'],
+    'C':['F'],
+    'D':[],
+    'E':[],
+    'F':[]
+}
+
+class GoalBasedAgent:
+    def __init__(self, goal, depth_limit):
+        self.goal = goal
+        self.limit = depth_limit
+
+    def dls(self, node, depth, path):
+        if node == self.goal:
+            return path
+
+        if depth == self.limit:
+            return None
+
+        for neighbor in graph[node]:
+            result = self.dls(neighbor, depth+1, path+[neighbor])
+            if result:
+                return result
+        return None
+
+    def search(self, start):
+        return self.dls(start, 0, [start])
+
+
+agent = GoalBasedAgent(goal='F', depth_limit=2)
+print("DLS Path:", agent.search('A'))
