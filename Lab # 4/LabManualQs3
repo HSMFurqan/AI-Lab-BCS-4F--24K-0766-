@@ -1,0 +1,28 @@
+graph = {
+    'A':['B','C'],
+    'B':['D','E'],
+    'C':['F'],
+    'D':[],
+    'E':[],
+    'F':[]
+}
+
+def dls(node, goal, depth):
+    if depth == 0 and node == goal:
+        return [node]
+    if depth > 0:
+        for neighbor in graph[node]:
+            path = dls(neighbor, goal, depth-1)
+            if path:
+                return [node] + path
+    return None
+
+def ids(start, goal, max_depth):
+    for depth in range(max_depth+1):
+        result = dls(start, goal, depth)
+        print("Depth", depth, ":", result)
+        if result:
+            return result
+    return None
+
+print("IDS Result:", ids('A','F',5))
