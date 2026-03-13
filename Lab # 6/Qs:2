@@ -1,0 +1,50 @@
+goal = 20
+beam_width = 2
+
+def heuristic(n):
+    return abs(goal - n)
+
+def generate_states(x):
+    states = [x + 2, x + 3, x * 2]
+    
+    states = [s for s in states if s <= goal]
+    
+    return states
+
+beam = [(1, [1])] 
+
+level = 0
+
+while beam:
+
+    print("Level", level)
+    candidates = []
+
+    for state, path in beam:
+
+        print("Exploring:", state)
+
+        if state == goal:
+            print("\nGoal reached!")
+            print("Final Path:", path)
+            exit()
+
+        for next_state in generate_states(state):
+
+            new_path = path + [next_state]
+
+            if next_state == goal:
+                print("\nGoal reached!")
+                print("Final Path:", new_path)
+                exit()
+
+            candidates.append((next_state, new_path))
+
+    candidates.sort(key=lambda x: heuristic(x[0]))
+
+    beam = candidates[:beam_width]
+
+    print("Selected states:", [s[0] for s in beam])
+    print()
+
+    level += 1
