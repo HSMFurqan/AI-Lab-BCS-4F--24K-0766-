@@ -1,0 +1,42 @@
+import random
+
+def f(x):
+    return -x**2 + 6*x
+
+min_x = 0
+max_x = 6
+
+x = random.randint(min_x, max_x)
+
+print("Initial value of x:", x)
+print("f(x) =", f(x))
+print()
+
+while True:
+    neighbors = []
+
+    if x - 1 >= min_x:
+        neighbors.append(x - 1)
+
+    if x + 1 <= max_x:
+        neighbors.append(x + 1)
+
+    best_neighbor = x
+    best_value = f(x)
+
+    for n in neighbors:
+        if f(n) > best_value:
+            best_neighbor = n
+            best_value = f(n)
+
+    if best_neighbor == x:
+        break
+
+    x = best_neighbor
+    print("Move to x =", x)
+    print("f(x) =", f(x))
+    print()
+
+print("Final optimal value:")
+print("x =", x)
+print("f(x) =", f(x))
