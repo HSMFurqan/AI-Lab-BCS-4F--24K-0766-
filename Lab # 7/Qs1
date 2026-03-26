@@ -1,0 +1,28 @@
+tree = {
+    "Root": ["N1", "N2"],
+    "N1": ["N3", "N4"],
+    "N2": ["N5", "N6"],
+    "N3": [4, 7],
+    "N4": [2, 5],
+    "N5": [1, 8],
+    "N6": [3, 6]
+}
+
+def minimax(node, is_max):
+    if isinstance(node, int):
+        return node
+
+    if is_max:
+        best = float('-inf')
+        for child in tree[node]:
+            val = minimax(child, False)
+            best = max(best, val)
+        return best
+    else:
+        best = float('inf')
+        for child in tree[node]:
+            val = minimax(child, True)
+            best = min(best, val)
+        return best
+
+print("Minimax Value:", minimax("Root", True))
