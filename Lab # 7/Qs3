@@ -1,0 +1,4 @@
+tree["N5"] = [1, 0]
+
+print("Modified Minimax:", minimax("Root", True))
+print("Modified AlphaBeta:", alphabeta("Root", float('-inf'), float('inf'), True))
