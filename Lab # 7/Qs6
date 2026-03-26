@@ -1,0 +1,18 @@
+model2 = cp_model.CpModel()
+
+x = model2.NewIntVar(0,20,'x')
+y = model2.NewIntVar(0,20,'y')
+z = model2.NewIntVar(0,20,'z')
+
+model2.Add(x + 2*y + z <= 20)
+model2.Add(3*x + y <= 18)
+
+model2.Maximize(4*x + 2*y + z)
+
+solver = cp_model.CpSolver()
+status = solver.Solve(model2)
+
+print("Optimal value:", solver.ObjectiveValue())
+print("x =", solver.Value(x))
+print("y =", solver.Value(y))
+print("z =", solver.Value(z))
