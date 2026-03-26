@@ -1,0 +1,21 @@
+model3 = cp_model.CpModel()
+
+queens = [model3.NewIntVar(0,3,f'q{i}') for i in range(4)]
+
+model3.AddAllDifferent(queens)
+
+for i in range(4):
+    for j in range(i+1,4):
+        model3.Add(queens[i] != queens[j])
+        model3.Add(queens[i] - queens[j] != i-j)
+        model3.Add(queens[i] - queens[j] != j-i)
+
+solver = cp_model.CpSolver()
+status = solver.Solve(model3)
+
+solution = [solver.Value(q) for q in queens]
+
+for i in range(4):
+    row = ["_"]*4
+    row[solution[i]] = "Q"
+    print(" ".join(row))
