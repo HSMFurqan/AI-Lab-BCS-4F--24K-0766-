@@ -1,0 +1,18 @@
+total_cards = 52
+red_cards = 26
+hearts = 13
+face_cards = 12
+diamond_face = 3
+spade_face = 3
+queens = 4
+overlap = 1
+
+p_red = red_cards / total_cards
+p_heart_given_red = hearts / red_cards
+p_diamond_given_face = diamond_face / face_cards
+p_spade_or_queen = (spade_face + queens - overlap) / face_cards
+
+print(p_red)
+print(p_heart_given_red)
+print(p_diamond_given_face)
+print(p_spade_or_queen)
