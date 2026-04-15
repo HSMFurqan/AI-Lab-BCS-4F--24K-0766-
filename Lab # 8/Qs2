@@ -1,0 +1,43 @@
+!pip install pgmpy
+
+from pgmpy.models import BayesianNetwork
+from pgmpy.factors.discrete import TabularCPD
+from pgmpy.inference import VariableElimination
+
+model = BayesianNetwork([
+    ('Intelligence', 'Grade'),
+    ('StudyHours', 'Grade'),
+    ('Difficulty', 'Grade'),
+    ('Grade', 'Pass')
+])
+
+cpd_I = TabularCPD('Intelligence', 2, [[0.7], [0.3]])
+cpd_S = TabularCPD('StudyHours', 2, [[0.6], [0.4]])
+cpd_D = TabularCPD('Difficulty', 2, [[0.4], [0.6]])
+
+cpd_G = TabularCPD(
+    'Grade', 3,
+    [[0.8,0.6,0.5,0.3,0.4,0.2,0.1,0.05],
+     [0.15,0.3,0.3,0.4,0.4,0.5,0.4,0.25],
+     [0.05,0.1,0.2,0.3,0.2,0.3,0.5,0.7]],
+    evidence=['Intelligence','StudyHours','Difficulty'],
+    evidence_card=[2,2,2]
+)
+
+cpd_P = TabularCPD(
+    'Pass', 2,
+    [[0.95,0.80,0.50],
+     [0.05,0.20,0.50]],
+    evidence=['Grade'],
+    evidence_card=[3]
+)
+
+model.add_cpds(cpd_I, cpd_S, cpd_D, cpd_G, cpd_P)
+
+infer = VariableElimination(model)
+
+q1 = infer.query(['Pass'], evidence={'StudyHours':0, 'Difficulty':0})
+q2 = infer.query(['Intelligence'], evidence={'Pass':0})
+
+print(q1)
+print(q2)
