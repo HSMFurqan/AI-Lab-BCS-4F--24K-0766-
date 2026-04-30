@@ -1,0 +1,33 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+
+df = pd.read_csv("/content/marketing_campaign.csv", sep='\t')
+
+features = ['Income', 'Recency', 'MntWines', 'MntMeatProducts']
+df = df[features]
+
+df.fillna(df.mean(), inplace=True)
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(df)
+
+wcss = []
+for i in range(2, 11):
+    kmeans = KMeans(n_clusters=i, random_state=42)
+    kmeans.fit(X_scaled)
+    wcss.append(kmeans.inertia_)
+
+plt.plot(range(2, 11), wcss)
+plt.xlabel("Clusters")
+plt.ylabel("WCSS")
+plt.show()
+
+kmeans = KMeans(n_clusters=4, random_state=42)
+labels = kmeans.fit_predict(X_scaled)
+
+df['Cluster'] = labels
+
+plt.scatter(X_scaled[:, 0], X_scaled[:, 1], c=labels)
+plt.show()
